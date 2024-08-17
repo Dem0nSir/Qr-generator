@@ -24,15 +24,16 @@ function App() {
   };
 
   return (
-    <div className="App">
-      {step === "welcome" && <Welcome onContinue={handleContinue} />}
-      {step === "category" && (
-        <CategorySelection onSelect={handleCategorySelect} />
-      )}
-      {step === "form" && (
-        <FormPage category={category} onSubmit={handleFormSubmit} />
-      )}
-      {step === "qr" && <QRCodeGenerator data={formData} />}
+
+      <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+          {step === 'welcome' && <Welcome onContinue={handleContinue}  />}
+          {step === 'category' && <CategorySelection onSelect={handleCategorySelect} />}
+          {step === 'form' && <FormPage category={category} onSubmit={handleFormSubmit} />}
+          {step === 'qr' && <QRCodeGenerator data={formData} />}
+        </div>
+      </div>
     </div>
   );
 }

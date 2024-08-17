@@ -28,15 +28,20 @@ function QRCodeGenerator({ data }) {
   const qrData = generateQRData();
 
   return (
-    <div>
-      <h2>Your QR Code</h2>
-      <div ref={qrRef}>
+    <div className="text-center">
+      <h2 className="mb-4">Your QR Code</h2>
+      <div ref={qrRef} className="mb-4">
         <QRCode value={qrData} size={256} />
       </div>
-      <p>Scan this QR code to access your information</p>
-      <div>
-        <button onClick={() => downloadQR('png')}>Download PNG</button>
-        <button onClick={() => downloadQR('jpeg')}>Download JPG</button>
+      <p className="mb-3">Scan this QR code to access your information</p>
+      {data.appName && (
+        <p className="mb-4">
+          This QR code will open your {data.appName} profile for {data.username}
+        </p>
+      )}
+      <div className="d-flex justify-content-center gap-2">
+        <button className="btn btn-primary" onClick={() => downloadQR('png')}>Download PNG</button>
+        <button className="btn btn-secondary" onClick={() => downloadQR('jpeg')}>Download JPG</button>
       </div>
     </div>
   );
