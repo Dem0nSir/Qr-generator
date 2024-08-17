@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Welcome from "./components/Welcome";
+import CategorySelection from "./components/CategorySelection";
+import FormPage from "./components/FormPage";
+import QRCodeGenerator from "./components/QRCodeGenerator";
 
 function App() {
+  const [step, setStep] = useState("welcome");
+  const [category, setCategory] = useState("");
+  const [formData, setFormData] = useState(null);
+
+  const handleContinue = () => {
+    setStep("category");
+  };
+
+  const handleCategorySelect = (selectedCategory) => {
+    setCategory(selectedCategory);
+    setStep("form");
+  };
+
+  const handleFormSubmit = (data) => {
+    setFormData(data);
+    setStep("qr");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {step === "welcome" && <Welcome onContinue={handleContinue} />}
+      {step === "category" && (
+        <CategorySelection onSelect={handleCategorySelect} />
+      )}
+      {step === "form" && (
+        <FormPage category={category} onSubmit={handleFormSubmit} />
+      )}
+      {step === "qr" && <QRCodeGenerator data={formData} />}
     </div>
   );
 }
