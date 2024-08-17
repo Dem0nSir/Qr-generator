@@ -9,32 +9,57 @@ function FormPage({ category, onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit({ ...formData, category });
   };
 
   const renderFields = () => {
     switch (category) {
       case 'Social Profile':
         return (
-            <>
-            <input name="username" placeholder="Username" onChange={handleChange} required />
-            <input name="appName" placeholder="App Name (e.g. Twitter, Instagram)" onChange={handleChange} required />
-            <input name="profileUrl" placeholder="Profile URL" onChange={handleChange} required />
+          <>
+            <div className="mb-3">
+              <input name="username" className="form-control" placeholder="Username" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <input name="appName" className="form-control" placeholder="App Name (e.g. Twitter, Instagram)" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <input name="profileUrl" className="form-control" placeholder="Profile URL" onChange={handleChange} required />
+            </div>
           </>
         );
       case 'Personal Info':
         return (
           <>
-            <input name="name" placeholder="Full Name" onChange={handleChange} />
-            <input name="email" placeholder="Email" onChange={handleChange} />
-            <input name="phone" placeholder="Phone" onChange={handleChange} />
+            <div className="mb-3">
+              <input name="name" className="form-control" placeholder="Full Name" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <input name="email" className="form-control" placeholder="Email" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <input name="phone" className="form-control" placeholder="Phone" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <input name="address" className="form-control" placeholder="Address" onChange={handleChange} required />
+            </div>
           </>
         );
       case 'Bank Account':
         return (
           <>
-            <input name="accountNumber" placeholder="Account Number" onChange={handleChange} />
-            <input name="bankName" placeholder="Bank Name" onChange={handleChange} />
+            <div className="mb-3">
+              <input name="accountHolder" className="form-control" placeholder="Account Holder Name" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <input name="accountNumber" className="form-control" placeholder="Account Number" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <input name="bankName" className="form-control" placeholder="Bank Name" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <input name="branchCode" className="form-control" placeholder="Branch Code" onChange={handleChange} required />
+            </div>
           </>
         );
       default:
@@ -44,9 +69,11 @@ function FormPage({ category, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>{category} Information</h2>
+      <h2 className="mb-4 text-center">{category} Information</h2>
       {renderFields()}
-      <button type="submit">Generate QR Code</button>
+      <div className="d-grid">
+        <button type="submit" className="btn btn-primary btn-lg">Generate QR Code</button>
+      </div>
     </form>
   );
 }
